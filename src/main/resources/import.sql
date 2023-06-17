@@ -6,3 +6,7 @@ INSERT INTO usuarios (username, password, email, rol) VALUES ('Angel', '$2a$10$o
 INSERT INTO usuarios (username, password, email, rol) VALUES ('Joaquin', '$2a$10$ocgbNtmsyMCm.LP/7vY2Y.eO8SsUKySmSQeeceG2Cl7QpMaD4kkK6', 'Joaquinc@mail.com','ROLE_CLIENTE');
 INSERT INTO usuarios (username, password, email, rol) VALUES ('Julian', '$2a$10$ocgbNtmsyMCm.LP/7vY2Y.eO8SsUKySmSQeeceG2Cl7QpMaD4kkK6', 'Juliana@mail.com','ROLE_CLIENTE');
 INSERT INTO usuarios (username, password, email, rol) VALUES ('admin', '$2a$10$ocgbNtmsyMCm.LP/7vY2Y.eO8SsUKySmSQeeceG2Cl7QpMaD4kkK6', 'admin@mail.com','ROLE_ADMIN');
+
+INSERT INTO productos (nombre, descripcion, precio, fecha) VALUES ('TV Samsung', 'Smart TV 40 pulgadas', 400000, NOW());
+INSERT INTO productos (nombre, descripcion, precio, fecha) VALUES ('Celular Samsung', 'S23 Ultra', 566000, NOW());
+INSERT INTO productos (nombre, descripcion, precio, fecha) VALUES ('NoteBook Lenovo', '512 Gb disco, 16Gb ram ', 400000, NOW());

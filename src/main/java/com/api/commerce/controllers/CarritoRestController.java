@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cliente")
-public class ClienteRestController {
+@RequestMapping("/carrito")
+public class CarritoRestController {
 
     @Autowired
     IUsuarioService clienteService;
-    @GetMapping("/listar")
-    public List<Usuario> list(){
+    @GetMapping("/listado")
+    public List<Usuario> index(){
         return clienteService.findAll();
     }
 }
