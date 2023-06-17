@@ -27,6 +27,7 @@ public class Carrito implements Serializable {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date fecha;
 
+    private Boolean pedidoRealizado;
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuario;
 

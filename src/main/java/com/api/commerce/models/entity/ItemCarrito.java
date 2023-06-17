@@ -23,6 +23,10 @@ public class ItemCarrito implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Producto producto;
 
+    public ItemCarrito(){}
+    public ItemCarrito(Producto producto){
+        this.producto = producto;
+    }
     public Double importeTotal(){
         return cantidad.doubleValue()*producto.getPrecio();
     }

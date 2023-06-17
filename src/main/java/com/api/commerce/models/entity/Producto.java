@@ -27,6 +27,8 @@ public class Producto implements Serializable {
     @NotEmpty
     private Double precio;
 
+    private Boolean disponible;
+
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date fecha;

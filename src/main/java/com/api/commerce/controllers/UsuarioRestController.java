@@ -5,16 +5,18 @@ import com.api.commerce.models.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
-
-import javax.naming.AuthenticationException;
 import java.security.Principal;
 
+import java.security.Principal;
+import java.util.List;
+
 @RestController
-@RequestMapping("/bienvenido")
-public class RegisterController {
+@RequestMapping("/usuario")
+public class UsuarioRestController {
+
+    @Autowired
+    IUsuarioService clienteService;
 
     @Autowired
     private IUsuarioService usuarioService;
@@ -29,13 +31,16 @@ public class RegisterController {
     }
 
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public ResponseEntity<String> login(@RequestParam(value = "error", required = false) String error, Principal principal) {
         if (principal != null) {
             return new ResponseEntity("Error en el login: Nombre de usuario o contraseña incorrecta, por favor vuelva a intentarlo!", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity("Se ha logeado con éxito", HttpStatus.OK);
+        return new ResponseEntity("User loged successfully", HttpStatus.OK);
     }
 
+    @GetMapping("/listar")
+    public List<Usuario> list(){
+        return clienteService.findAll();
+    }
 }
-
