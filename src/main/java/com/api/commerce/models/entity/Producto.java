@@ -15,10 +15,12 @@ import java.util.Date;
 @Entity
 @Table(name = "productos")
 public class Producto implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
     @NotEmpty
     private String nombre;
 
@@ -27,7 +29,7 @@ public class Producto implements Serializable {
     @NotEmpty
     private Double precio;
 
-    private Boolean disponible;
+    private Boolean disponible = true;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="yyyy-MM-dd")

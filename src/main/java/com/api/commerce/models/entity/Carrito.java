@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "carritos")
 public class Carrito implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -28,6 +29,7 @@ public class Carrito implements Serializable {
     private Date fecha;
 
     private Boolean pedidoRealizado;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuario;
 
@@ -36,6 +38,7 @@ public class Carrito implements Serializable {
     private List<ItemCarrito> items;
 
     public Carrito(){
+        this.pedidoRealizado = true;
         this.items = new ArrayList<>();
     }
 
@@ -51,6 +54,7 @@ public class Carrito implements Serializable {
     public Double percioTotal(){
         return this.items.stream().mapToDouble(ItemCarrito :: importeTotal).sum();
     }
+
     @Serial
     private static final long serialVersionUID = 1L;
 }

@@ -6,13 +6,13 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "carrito_items")
 public class ItemCarrito implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -24,9 +24,12 @@ public class ItemCarrito implements Serializable {
     private Producto producto;
 
     public ItemCarrito(){}
+
     public ItemCarrito(Producto producto){
         this.producto = producto;
+        this.cantidad = 1;
     }
+
     public Double importeTotal(){
         return cantidad.doubleValue()*producto.getPrecio();
     }

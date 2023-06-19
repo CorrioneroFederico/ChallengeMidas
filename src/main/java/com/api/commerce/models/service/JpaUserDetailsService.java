@@ -22,7 +22,7 @@ public class JpaUserDetailsService implements UserDetailsService{
     @Autowired
     private IUsuarioService usuarioService;
 
-    private Logger logger = LoggerFactory.getLogger(JpaUserDetailsService.class);
+    private final Logger logger = LoggerFactory.getLogger(JpaUserDetailsService.class);
 
 
     @Override
@@ -31,7 +31,7 @@ public class JpaUserDetailsService implements UserDetailsService{
 
         Usuario usuario = usuarioService.findbyUsername(username);
 
-        List<GrantedAuthority> authorities = new ArrayList();
+        List<GrantedAuthority> authorities = new ArrayList<>();
 
         if(usuario == null){
             logger.error("Login error: el usuario con el username "+username+" no existe");
@@ -40,10 +40,12 @@ public class JpaUserDetailsService implements UserDetailsService{
 
         authorities.add(new SimpleGrantedAuthority(usuario.getRol()));
 
-        if(authorities.isEmpty()){
+        /*if(authorities.isEmpty()){
             logger.error("Login error: el usuario "+usuario.getUsername()+" no posee roles asignados");
             throw new UsernameNotFoundException("Login error: el usuario "+usuario.getUsername()+" no posee roles asignados");
-        }
+        }*/
+
         return new User(usuario.getUsername(),usuario.getPassword(),true,true,true,true,authorities);
     }
 }
+// El "if" comentado es simplemente para quitar el Waning, ya que siempre van a tener un rol asignado los usuarios.

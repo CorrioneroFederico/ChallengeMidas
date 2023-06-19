@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/carrito")
@@ -19,6 +18,6 @@ public class CarritoRestController {
 
     @GetMapping("/listar")
     public List<Carrito> listar(){
-        return this.carritoService.findAll().stream().filter( carrito -> carrito.getPedidoRealizado()).collect(Collectors.toList());
+        return this.carritoService.fetchByIdWithUIP();
     }
 }

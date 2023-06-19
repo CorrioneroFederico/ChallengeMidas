@@ -1,6 +1,6 @@
 package com.api.commerce.models.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "usuarios")
 public class Usuario implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -37,13 +38,14 @@ public class Usuario implements Serializable {
     private String rol;
 
     @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Carrito> carritos;
 
     public Usuario(){
         this.carritos = new ArrayList<>();
     }
 
-    public void addPedido(Carrito carrito){
+    public void addCarrito(Carrito carrito){
         this.carritos.add(carrito);
     }
 

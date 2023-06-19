@@ -5,10 +5,11 @@ import com.api.commerce.models.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import java.security.Principal;
 
 import java.security.Principal;
+
 import java.util.List;
 
 @RestController
@@ -24,19 +25,26 @@ public class UsuarioRestController {
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody Usuario usuario) {
         if (usuarioService.findbyUsername(usuario.getUsername()) != null) {
-            return new ResponseEntity("Username already exists", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("El nombre de usuario no esta disponible.", HttpStatus.BAD_REQUEST);
         }
-        usuarioService.save(usuario);
-        return new ResponseEntity("User registered successfully", HttpStatus.OK);
-    }
 
+        usuarioService.save(usuario);
+        return new ResponseEntity<>("Se ha registrado exitosamente.", HttpStatus.OK);
+    }
 
     @GetMapping("/login")
     public ResponseEntity<String> login(@RequestParam(value = "error", required = false) String error, Principal principal) {
-        if (principal != null) {
-            return new ResponseEntity("Error en el login: Nombre de usuario o contraseña incorrecta, por favor vuelva a intentarlo!", HttpStatus.BAD_REQUEST);
+        if (principal == null) {
+            return new ResponseEntity<>("Error en el login: Nombre de usuario y/o contraseña incorrecta, por favor vuelva a intentarlo", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity("User loged successfully", HttpStatus.OK);
+
+        return new ResponseEntity<>("Bienvenido " + principal.getName(), HttpStatus.OK);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout() {
+        SecurityContextHolder.clearContext();
+        return new ResponseEntity<>("Se ha deslogeado con exito.", HttpStatus.OK);
     }
 
     @GetMapping("/listar")

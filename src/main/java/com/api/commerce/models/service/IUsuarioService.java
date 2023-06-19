@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IUsuarioService {
 
-    public List<Usuario> findAll();
+    List<Usuario> findAll();
 
-    public Usuario findbyUsername(String username);
+    Usuario findbyUsername(String username);
 
-    public void save(Usuario usuario);
+    void save(Usuario usuario);
 }
